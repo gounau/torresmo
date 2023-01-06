@@ -1,6 +1,6 @@
 {
   "filter":{
     "name":"Filter to activate or deactivate the app's contents (true, false)",
-    "value":false
+    "value":true
   }
 }
