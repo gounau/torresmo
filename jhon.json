@@ -12,9 +12,11 @@
     "ad_manager_interstitial_unit_id": "/6499/example/interstitial",
     "ad_manager_native_unit_id": "/6499/example/native",
     "ad_manager_app_open_ad_unit_id": "/6499/example/app-open",
-    "fan_banner_unit_id": "IMG_16_9_APP_INSTALL#1102290040176998_1102321626840506",
-    "fan_interstitial_unit_id": "IMG_16_9_APP_INSTALL#1102290040176998_1102318190084183",
-    "fan_native_unit_id": "IMG_16_9_APP_INSTALL#1102290040176998_1142394442833224",
+    "fan_banner_unit_id": "2116185228959163_2123201751590844",
+    "fan_interstitial_unit_id": "2116185228959163_2123202464924106",
+    "fan_banner_nativo_unit_id": "2116185228959163_2123202464924106",
+    "fan_banner_nativo_unit_id": "2116185228959163_2123202464924106",  
+    "fan_native_unit_id": "2116185228959163_2123197121591307",
     "startapp_app_id": "0",
     "unity_game_id": "4089993",
     "unity_banner_placement_id": "banner",
@@ -44,3 +46,6 @@
     }
   }
 }
+
+Vc não entendeu, as outra funções estão ok. o problema está em "continue assistindo" ele deveria carregar o ep que foi assistido. Mas ele continua a ir para a pagina Serie.
+o problema é esse, quando carrega a api do sk-api, ele fica com esse bug. 
