@@ -45,7 +45,4 @@
       "app_open_ad_on_resume": true
     }
   }
-}
-
-Vc não entendeu, as outra funções estão ok. o problema está em "continue assistindo" ele deveria carregar o ep que foi assistido. Mas ele continua a ir para a pagina Serie.
-o problema é esse, quando carrega a api do sk-api, ele fica com esse bug. 
+} 
