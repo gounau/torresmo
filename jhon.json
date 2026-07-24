@@ -1,7 +1,7 @@
 {
   "ads": {
     "ad_status": true,
-    "main_ads": "fan",
+    "main_ads": "unity",
     "backup_ads": "none",
     "admob_publisher_id": "pub-3940256099942544",
     "admob_banner_unit_id": "ca-app-pub-3940256099942544/6300978111",
@@ -18,9 +18,9 @@
     "fan_banner_nativo_unit_id": "2116185228959163_2123202464924106",  
     "fan_native_unit_id": "2116185228959163_2123197121591307",
     "startapp_app_id": "0",
-    "unity_game_id": "4089993",
-    "unity_banner_placement_id": "banner",
-    "unity_interstitial_placement_id": "video",
+    "unity_game_id": "800103876",
+    "unity_banner_placement_id": "Banner",
+    "unity_interstitial_placement_id": "Interstitial",
     "applovin_banner_ad_unit_id": "0",
     "applovin_interstitial_ad_unit_id": "0",
     "applovin_native_ad_manual_unit_id": "0",
