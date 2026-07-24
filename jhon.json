@@ -1,7 +1,7 @@
 {
   "ads": {
     "ad_status": true,
-    "main_ads": "admob",
+    "main_ads": "ironsource",
     "backup_ads": "admob",
     "admob_publisher_id": "pub-7422882275930998",
     "admob_banner_unit_id": "ca-app-pub-7422882275930998/3314701652",
