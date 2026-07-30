@@ -4,10 +4,11 @@
     "main_ads": "admob",
     "backup_ads": "admob",
     "admob_publisher_id": "pub-7422882275930998",
+    "admob_app_id": "ca-app-pub-7422882275930998~2282314871",
     "admob_banner_unit_id": "ca-app-pub-7422882275930998/3314701652",
     "admob_interstitial_unit_id": "ca-app-pub-7422882275930998/2480252273",
     "admob_native_unit_id": "ca-app-pub-7422882275930998/1167170603",
-    "admob_app_open_ad_unit_id": "ca-app-pub-3940256099942544/3419835294",
+    "admob_app_open_ad_unit_id": "0",
     "ad_manager_banner_unit_id": "/6499/example/banner",
     "ad_manager_interstitial_unit_id": "/6499/example/interstitial",
     "ad_manager_native_unit_id": "/6499/example/native",
@@ -15,7 +16,6 @@
     "fan_banner_unit_id": "2116185228959163_2123201751590844",
     "fan_interstitial_unit_id": "2116185228959163_2123202464924106",
     "fan_banner_nativo_unit_id": "2116185228959163_2123202464924106",
-    "fan_banner_nativo_unit_id": "2116185228959163_2123202464924106",  
     "fan_native_unit_id": "2116185228959163_2123197121591307",
     "startapp_app_id": "0",
     "unity_game_id": "800103876",
@@ -41,8 +41,8 @@
       "interstitial_web_page_link": true,
       "native_drawer_menu": true,
       "native_exit_dialog": true,
-      "app_open_ad_on_start": true,
-      "app_open_ad_on_resume": true
+      "app_open_ad_on_start": false,
+      "app_open_ad_on_resume": false
     }
   }
-} 
+}
