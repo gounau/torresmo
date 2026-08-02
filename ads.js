@@ -1,5 +1,5 @@
 // ============================================================
-// ads.js - Pop-up intersticial com banner afiliado Shopee
+// ads.js - Banner Afiliado Shopee (SKIN1004 Protetor Solar)
 // ============================================================
 
 (function() {
@@ -7,211 +7,107 @@
 
   // ===== CONFIGURAÇÕES =====
   const LINK_AFILIADO = 'https://s.shopee.com.br/3g2YWeAKnb';
-  const IMAGEM_PRODUTO = 'https://http2.mlstatic.com/D_NQ_NP_2X_934517-MLU75092948983_032024-F.webp';
-  const NOME_PRODUTO = 'SKIN1004 Madagascar Centella Hyalu-Cica';
-  const PRECO = 'R$ 89,90';
-  const PRECO_ORIGINAL = 'R$ 129,90';
-  const AVALIACAO = '★★★★★ (4.8 • 2.3k avaliações)';
-  const BADGE = '⭐ Mais Vendido';
+  const IMAGEM_PRODUTO = 'https://down-br.img.susercontent.com/file/sg-11134201-7rd5j-luq2ixcw0w6o88@resize_w900_nl.webp';
+  const LOGO_SHOPEE = 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg';
 
-  // Tempo em ms para exibir o pop-up (0 = imediato)
-  const DELAY_EXIBICAO = 2000;
-
-  // ===== CRIAÇÃO DO POP-UP =====
-  function criarPopUp() {
-    // 1. Overlay (fundo escuro)
-    const overlay = document.createElement('div');
-    overlay.id = 'popup-shopee-overlay';
-    overlay.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
+  // ===== CRIA O BANNER =====
+  function criarBanner() {
+    // Container principal do banner
+    var banner = document.createElement('div');
+    banner.id = 'banner-shopee-doramas';
+    banner.style.cssText = `
+      background: linear-gradient(135deg, #fff8f5 0%, #ffe8e0 100%);
+      border-radius: 12px;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      z-index: 999999;
-      backdrop-filter: blur(4px);
-      animation: popupFadeIn 0.3s ease;
+      justify-content: space-between;
+      gap: 10px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      box-shadow: 0 4px 12px rgba(238, 77, 45, 0.12);
+      border: 1px solid #f0d0c8;
+      max-width: 760px;
+      width: 100%;
+      margin: 10px auto;
+      flex-wrap: wrap;
+      box-sizing: border-box;
     `;
 
-    // 2. Card do banner
-    const card = document.createElement('div');
-    card.id = 'popup-shopee-card';
-    card.style.cssText = `
-      background: #fff;
-      border-radius: 24px;
-      max-width: 440px;
-      width: 92%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 8px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
-      animation: popupSlideUp 0.4s ease;
-      position: relative;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    // ---- Imagem do produto ----
+    var imgProduto = document.createElement('div');
+    imgProduto.style.cssText = 'flex: 0 0 65px;';
+    imgProduto.innerHTML = '<img src="' + IMAGEM_PRODUTO + '" alt="Protetor Solar Coreano" style="width:100%; height:auto; border-radius:8px; display:block;" loading="lazy">';
+
+    // ---- Texto (título + descrição) ----
+    var textoDiv = document.createElement('div');
+    textoDiv.style.cssText = 'flex: 1; min-width: 150px;';
+
+    var titulo = document.createElement('div');
+    titulo.style.cssText = 'font-size: 16px; font-weight: 800; color: #ee4d2d; line-height: 1.2; letter-spacing: -0.3px;';
+    titulo.textContent = '🔥 OFERTA IMPERDÍVEL!';
+
+    var descricao = document.createElement('div');
+    descricao.style.cssText = 'font-size: 11px; color: #2d2d3f; line-height: 1.4; margin-top: 2px; font-weight: 500; word-wrap: break-word;';
+    descricao.textContent = '50ml SPF50 + Madagascar Centella Protetor Solar Facial PA + Hyalu-cica Soro Hidratante Sunblock Anti-UV Cuidados Com A Pele Coreana';
+
+    textoDiv.appendChild(titulo);
+    textoDiv.appendChild(descricao);
+
+    // ---- Logo Shopee + Botão ----
+    var acoesDiv = document.createElement('div');
+    acoesDiv.style.cssText = 'display: flex; align-items: center; gap: 10px; flex: 0 0 auto;';
+
+    // Logo Shopee
+    var logo = document.createElement('img');
+    logo.src = LOGO_SHOPEE;
+    logo.alt = 'Shopee';
+    logo.style.cssText = 'height: 28px; width: auto; display: block;';
+    logo.loading = 'lazy';
+
+    // Botão
+    var botao = document.createElement('a');
+    botao.href = LINK_AFILIADO;
+    botao.target = '_blank';
+    botao.rel = 'noopener noreferrer';
+    botao.textContent = 'Comprar';
+    botao.style.cssText = `
+      background: #ee4d2d;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 9px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.3s ease, transform 0.2s;
+      box-shadow: 0 4px 12px rgba(238, 77, 45, 0.3);
+      display: inline-block;
     `;
+    botao.onmouseover = function() { this.style.background = '#d43d1f'; this.style.transform = 'scale(1.03)'; };
+    botao.onmouseout = function() { this.style.background = '#ee4d2d'; this.style.transform = 'scale(1)'; };
 
-    // 3. Botão de fechar (X)
-    const btnFechar = document.createElement('button');
-    btnFechar.id = 'popup-shopee-fechar';
-    btnFechar.innerHTML = '✕';
-    btnFechar.style.cssText = `
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      background: none;
-      border: none;
-      font-size: 28px;
-      font-weight: 300;
-      color: #999;
-      cursor: pointer;
-      z-index: 10;
-      transition: color 0.2s;
-      line-height: 1;
-    `;
-    btnFechar.onmouseover = () => btnFechar.style.color = '#333';
-    btnFechar.onmouseout = () => btnFechar.style.color = '#999';
-    btnFechar.onclick = fecharPopUp;
+    // Adiciona logo e botão ao container de ações
+    acoesDiv.appendChild(logo);
+    acoesDiv.appendChild(botao);
 
-    // 4. Conteúdo do banner (HTML)
-    const bannerHTML = `
-      <div class="banner-inner" style="padding:20px 20px 25px; text-align:center;">
-        <!-- Badge -->
-        <div style="display:inline-block; background:#ffd700; color:#1a1a2e; font-size:11px; font-weight:700; padding:4px 14px; border-radius:50px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:12px;">
-          ${BADGE}
-        </div>
+    // Monta o banner
+    banner.appendChild(imgProduto);
+    banner.appendChild(textoDiv);
+    banner.appendChild(acoesDiv);
 
-        <!-- Imagem -->
-        <div style="width:100%; max-width:220px; margin:0 auto 16px; border-radius:16px; background:#f0f4f8; padding:10px; box-shadow:inset 0 2px 8px rgba(0,0,0,0.04); transition:transform 0.4s ease;">
-          <img src="${IMAGEM_PRODUTO}" alt="Protetor Solar SKIN1004" style="width:100%; height:auto; display:block; border-radius:12px;" loading="lazy" onerror="this.src='https://placehold.co/400x400/1a1a2e/white?text=SKIN1004+SPF50'">
-        </div>
-
-        <!-- Nome -->
-        <h3 style="font-size:15px; font-weight:700; color:#1a1a2e; line-height:1.4; margin:0 0 6px; letter-spacing:-0.2px;">
-          ${NOME_PRODUTO}
-        </h3>
-        <p style="font-size:13px; color:#6c757d; margin:0 0 12px; font-weight:400;">
-          Protetor Solar Facial SPF50+ PA++++ • 50ml
-        </p>
-
-        <!-- Avaliação -->
-        <div style="font-size:14px; color:#f5a623; margin:0 0 14px; letter-spacing:2px;">
-          ${AVALIACAO}
-        </div>
-
-        <!-- Preço -->
-        <div style="font-size:22px; font-weight:800; color:#ee4d2d; margin:0 0 6px; letter-spacing:-0.5px;">
-          ${PRECO} <span style="font-size:14px; font-weight:400; color:#999; text-decoration:line-through; margin-left:8px;">${PRECO_ORIGINAL}</span>
-        </div>
-
-        <!-- Botão -->
-        <a href="${LINK_AFILIADO}" target="_blank" rel="noopener noreferrer" class="banner-botao" style="display:inline-block; background:#ee4d2d; color:#fff; font-size:16px; font-weight:700; padding:14px 40px; border-radius:50px; text-decoration:none; transition:all 0.3s ease; box-shadow:0 4px 15px rgba(238,77,45,0.35); letter-spacing:0.5px; border:none; cursor:pointer; width:100%; max-width:280px; margin-top:6px;" onmouseover="this.style.background='#d43d1f'; this.style.transform='scale(1.03)'" onmouseout="this.style.background='#ee4d2d'; this.style.transform='scale(1)'">
-          🛒 Comprar na Shopee
-        </a>
-
-        <!-- Contador de cliques -->
-        <div style="font-size:12px; color:#adb5bd; margin-top:14px; border-top:1px solid #e9ecef; padding-top:14px; width:100%;">
-          👀 <span id="contador-cliques">0</span> pessoas já clicaram hoje
-        </div>
-      </div>
-    `;
-
-    card.innerHTML = bannerHTML;
-    card.prepend(btnFechar);
-
-    overlay.appendChild(card);
-    document.body.appendChild(overlay);
-
-    // Impede scroll
-    document.body.style.overflow = 'hidden';
-
-    // Fecha ao clicar no overlay (fora do card)
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) fecharPopUp();
-    });
-
-    // Fecha com ESC
-    document.addEventListener('keydown', function handler(e) {
-      if (e.key === 'Escape') {
-        fecharPopUp();
-        document.removeEventListener('keydown', handler);
-      }
-    });
-
-    // Inicializa o contador
-    inicializarContador();
+    // Insere o banner no site
+    // Opção 1: substituir o local do script (se o script estiver no body)
+    // Opção 2: adicionar ao final do body
+    // Vamos usar a opção 2 (mais segura)
+    document.body.appendChild(banner);
   }
 
-  // ===== FUNÇÃO PARA FECHAR =====
-  function fecharPopUp() {
-    const overlay = document.getElementById('popup-shopee-overlay');
-    if (overlay) {
-      overlay.style.transition = 'opacity 0.3s ease';
-      overlay.style.opacity = '0';
-      setTimeout(() => {
-        overlay.remove();
-        document.body.style.overflow = '';
-      }, 300);
-    }
+  // ===== EXECUTA QUANDO O DOM ESTIVER PRONTO =====
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', criarBanner);
+  } else {
+    // DOM já carregado
+    criarBanner();
   }
-
-  // ===== CONTADOR DE CLIQUES (localStorage) =====
-  function inicializarContador() {
-    const STORAGE_KEY = 'banner_shopee_doramas_cliques';
-    const DATA_KEY = 'banner_shopee_doramas_data';
-    const hoje = new Date().toDateString();
-    let contador = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
-    const dataSalva = localStorage.getItem(DATA_KEY);
-
-    if (dataSalva !== hoje) {
-      contador = 0;
-      localStorage.setItem(STORAGE_KEY, '0');
-      localStorage.setItem(DATA_KEY, hoje);
-    }
-
-    const el = document.getElementById('contador-cliques');
-    if (el) el.textContent = contador;
-
-    // Sobrescreve a função global contarClique (usada no onclick do botão)
-    window.contarClique = function(event) {
-      const atual = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
-      const novo = atual + 1;
-      localStorage.setItem(STORAGE_KEY, String(novo));
-      localStorage.setItem(DATA_KEY, new Date().toDateString());
-      const elCont = document.getElementById('contador-cliques');
-      if (elCont) elCont.textContent = novo;
-    };
-
-    // Adiciona o onclick no botão (caso o link já tenha sido criado)
-    const botao = document.querySelector('.banner-botao');
-    if (botao) {
-      botao.addEventListener('click', window.contarClique);
-    }
-  }
-
-  // ===== ADICIONA ANIMAÇÕES CSS =====
-  function adicionarEstilos() {
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes popupFadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-      @keyframes popupSlideUp {
-        from { transform: translateY(40px) scale(0.95); opacity: 0; }
-        to { transform: translateY(0) scale(1); opacity: 1; }
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
-  // ===== INICIALIZAÇÃO =====
-  adicionarEstilos();
-
-  // Exibe o pop-up após o delay
-  setTimeout(criarPopUp, DELAY_EXIBICAO);
 
 })();
