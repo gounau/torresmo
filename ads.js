@@ -1,5 +1,5 @@
 // ================================================================
-// ads.js - Sistema de anúncios com document.write
+// ads.js - Funciona no <head> ou no <body>
 // ================================================================
 
 (function () {
@@ -21,7 +21,6 @@
     if (document.getElementById(CSS_ID)) return;
 
     var css =
-      "#_ad-system-styles{display:none;}" +
       ".ads-card{" +
         "background:#ffffff;" +
         "border:1px solid #e2e8f0;" +
@@ -129,7 +128,6 @@
         "outline:3px solid #fed7aa;" +
         "outline-offset:2px;" +
       "}" +
-      /* Variante compact */
       ".ads-compact{" +
         "background:linear-gradient(135deg,#fff8f5 0%,#ffe8e0 100%);" +
         "border-radius:12px;" +
@@ -186,7 +184,6 @@
         "display:inline-block;" +
         "box-shadow:0 4px 12px rgba(238,77,45,0.3);" +
       "}" +
-      /* Variante banner */
       ".ads-banner{" +
         "position:relative;" +
         "max-width:800px;" +
@@ -224,7 +221,6 @@
         "margin:0;" +
         "opacity:.9;" +
       "}" +
-      /* Responsivo */
       "@media (max-width:520px){" +
         ".ads-card{flex-direction:column;align-items:flex-start;padding:14px;}" +
         ".ads-thumb{width:100%;height:160px;flex:auto;}" +
@@ -270,8 +266,9 @@
       : "";
     var price = ad.preco ? '<div class="ads-price">' + escapeHtml(ad.preco) + "</div>" : "";
 
-    return (
-      '<div class="ads-card">' +
+    var wrapper = document.createElement("div");
+    wrapper.className = "ads-card";
+    wrapper.innerHTML =
       tag +
       '<div class="ads-thumb"><img src="' +
       escapeHtml(ad.imagem) +
@@ -294,17 +291,18 @@
       '" class="ads-cta" target="_blank" rel="noopener noreferrer" aria-label="Comprar ' +
       escapeHtml(ad.titulo) +
       '">Comprar</a>' +
-      "</div>" +
-      "</div>"
-    );
+      "</div>";
+
+    return wrapper;
   }
 
   function renderCompact(ad) {
     var logo = ad.logo
       ? '<img src="' + escapeHtml(ad.logo) + '" alt="" class="ads-logo" loading="lazy">'
       : "";
-    return (
-      '<div class="ads-compact">' +
+    var wrapper = document.createElement("div");
+    wrapper.className = "ads-compact";
+    wrapper.innerHTML =
       '<div class="ads-thumb-compact"><img src="' +
       escapeHtml(ad.imagem) +
       '" alt="' +
@@ -323,18 +321,22 @@
       '<a href="' +
       escapeHtml(ad.link) +
       '" class="ads-cta-compact" target="_blank" rel="noopener noreferrer">Comprar</a>' +
-      "</div>" +
-      "</div>"
-    );
+      "</div>";
+
+    return wrapper;
   }
 
   function renderBanner(ad) {
-    return (
-      '<a href="' +
-      escapeHtml(ad.link) +
-      '" class="ads-banner" target="_blank" rel="noopener noreferrer" aria-label="' +
-      escapeHtml(ad.titulo) +
-      '">' +
+    var wrapper = document.createElement("a");
+    wrapper.href = escapeHtml(ad.link);
+    wrapper.className = "ads-banner";
+    wrapper.target = "_blank";
+    wrapper.rel = "noopener noreferrer";
+    wrapper.setAttribute(
+      "aria-label",
+      "Comprar " + escapeHtml(ad.titulo)
+    );
+    wrapper.innerHTML =
       '<img src="' +
       escapeHtml(ad.imagem) +
       '" alt="" loading="lazy">' +
@@ -345,26 +347,41 @@
       '<div class="ads-banner-desc">' +
       escapeHtml(ad.descricao) +
       "</div>" +
-      "</div>" +
-      "</a>"
-    );
+      "</div>";
+
+    return wrapper;
+  }
+
+  function insertAd(element) {
+    injectStyles();
+
+    if (document.body) {
+      document.body.appendChild(element);
+      return;
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.appendChild(element);
+      });
+    } else {
+      document.body.appendChild(element);
+    }
   }
 
   function render() {
     var ad = pickAd();
-    var html;
-
-    injectStyles();
+    var element;
 
     if (template === "compact") {
-      html = renderCompact(ad);
+      element = renderCompact(ad);
     } else if (template === "banner") {
-      html = renderBanner(ad);
+      element = renderBanner(ad);
     } else {
-      html = renderCard(ad);
+      element = renderCard(ad);
     }
 
-    document.write(html);
+    insertAd(element);
   }
 
   render();
